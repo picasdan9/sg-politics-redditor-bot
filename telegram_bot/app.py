@@ -40,7 +40,16 @@ def main():
     respond_handler = MessageHandler(Filters.text & (~Filters.command), respond)
     dispatcher.add_handler(respond_handler)
 
-    updater.start_polling()
+    port = os.getenv('PORT')
+    if port!='None':
+        updater.start_webhook(listen='0.0.0.0',
+                            port=int(port),
+                            url_path=API_TOKEN)
+        updater.bot.set_webhook("https://sg-politics-redditor.herokuapp.com/" + API_TOKEN)
+    else:
+        updater.start_polling()
+    
+    updater.idle()
 
 if __name__=='__main__':
     main()
