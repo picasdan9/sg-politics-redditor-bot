@@ -29,7 +29,7 @@ def main():
     load_markov_chain()
 
     with open('env.txt', 'r') as f:
-        API_TOKEN = f.read().split('=')[1].strip()
+        API_TOKEN = f.read()
     
     updater = Updater(token=API_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
