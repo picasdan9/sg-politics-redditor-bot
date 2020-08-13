@@ -33,6 +33,7 @@ def respond(update, context):
 def main():
     load_markov_chain()
     API_TOKEN = os.getenv('API_TOKEN')
+    print(API_TOKEN)
     
     updater = Updater(token=API_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
