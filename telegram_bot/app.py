@@ -2,8 +2,11 @@ import os
 import json 
 import markovify
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from dotenv import load_dotenv
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    next
 
 markov_chain = None
 
