@@ -1,6 +1,9 @@
+import os
 import json 
 import markovify
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from dotenv import load_dotenv
+load_dotenv()
 
 markov_chain = None
 
@@ -10,7 +13,6 @@ def load_markov_chain():
         model_json = json.load(f)
         
     markov_chain = markovify.Text.from_json(model_json)
-
 
 def start(update, context):
     text = markov_chain.make_short_sentence(280)
@@ -27,9 +29,7 @@ def respond(update, context):
 
 def main():
     load_markov_chain()
-
-    with open('env.txt', 'r') as f:
-        API_TOKEN = f.read()
+    API_TOKEN = os.getenv('API_TOKEN')
     
     updater = Updater(token=API_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
